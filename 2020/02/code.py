@@ -2,8 +2,8 @@
 
 import re
 
-filepath = 'input.txt'
 v2 = False # change to True if doing the second version of the puzzle
+filepath = 'input.txt'
 
 filehandle = open(filepath, 'r')
 entries = filehandle.read().strip().split('\n')

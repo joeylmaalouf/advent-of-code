@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
+v2 = False # change to True if doing the second version of the puzzle
 filepath = 'input.txt'
 total = 2020
-v2 = False # change to True if doing the second version of the puzzle
 
 filehandle = open(filepath, 'r')
 entries = [int(n) for n in filehandle.read().strip().split('\n')]

@@ -2,6 +2,7 @@
 
 import re
 
+v2 = False # change to True if doing the second version of the puzzle
 filepath = 'input.txt'
 required = {
 	'byr': lambda x: True if re.match(r'^\d{4}$', x) and (1920 <= int(x) <= 2002) else False,
@@ -16,7 +17,6 @@ required = {
 	'pid': lambda x: True if re.match(r'^\d{9}$', x) else False
 }
 optional = ['cid']
-v2 = False # change to True if doing the second version of the puzzle
 
 filehandle = open(filepath, 'r')
 passports = filehandle.read().strip().split('\n\n')

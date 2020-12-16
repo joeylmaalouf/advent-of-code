@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-filepath = 'input.txt'
 v2 = False # change to True if doing the second version of the puzzle
+filepath = 'input.txt'
 
 filehandle = open(filepath, 'r')
 grid = [list(line) for line in filehandle.read().strip().split('\n')]
