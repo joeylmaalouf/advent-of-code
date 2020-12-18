@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-v2 = True # change to True if doing the second version of the puzzle
+v2 = False # change to True if doing the second version of the puzzle
 filepath = 'input.txt'
 
 filehandle = open(filepath, 'r')
