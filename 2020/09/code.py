@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from itertools import combinations 
+from itertools import combinations
 
 v2 = False # change to True if doing the second version of the puzzle
 filepath = 'input.txt'
