@@ -2,18 +2,18 @@
 
 
 def main (filepath):
-	depths = parse(filepath)
-	print('part 1:', increases(depths, 0)) # a 0-wide window on either side means 1 data point alone
-	print('part 2:', increases(depths, 1)) # a 1-wide window on either side means 3 data points combined
+	depths = parse_input(filepath)
+	print('part 1:', count_increases(depths, 0)) # a 0-wide window on either side means 1 data point alone
+	print('part 2:', count_increases(depths, 1)) # a 1-wide window on either side means 3 data points combined
 
 
-def parse (filepath):
+def parse_input (filepath):
 	with open(filepath, 'r') as filehandle:
 		# the input is a list of numbers
 		return [int(depth) for depth in filehandle.read().strip().split('\n')]
 
 
-def increases (depths, window):
+def count_increases (depths, window):
 	count = 0
 
 	# the first entry should always be skipped, since we have no prior value to compare against

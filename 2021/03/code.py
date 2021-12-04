@@ -2,12 +2,12 @@
 
 
 def main (filepath, base):
-	numbers = parse(filepath)
+	numbers = parse_input(filepath)
 	print('part 1:', power_consumption(numbers, base))
 	print('part 2:', lifesupport_rating(numbers, base))
 
 
-def parse (filepath):
+def parse_input (filepath):
 	with open(filepath, 'r') as filehandle:
 		# the input is a list of numbers as digit strings
 		return filehandle.read().strip().split('\n')

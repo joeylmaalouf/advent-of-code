@@ -2,12 +2,12 @@
 
 
 def main (filepath):
-	commands = parse(filepath)
-	print('part 1:', position(commands, True))
-	print('part 2:', position(commands, False))
+	commands = parse_input(filepath)
+	print('part 1:', get_position(commands, True))
+	print('part 2:', get_position(commands, False))
 
 
-def parse (filepath):
+def parse_input (filepath):
 	with open(filepath, 'r') as filehandle:
 		# the input is a list of direction-amount pairs
 		commands = filehandle.read().strip().split('\n')
@@ -17,7 +17,7 @@ def parse (filepath):
 		return commands
 
 
-def position (commands, simple):
+def get_position (commands, simple):
 	horizontal, vertical, aim = 0, 0, 0
 
 	# these functions represent the different ways we change our horizontal (x), vertical (y), and aim (a) values by some amount (n)
