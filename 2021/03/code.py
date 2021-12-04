@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
 
-def main (filepath, base):
-	numbers = parse_input(filepath)
+def main (filepath):
+	numbers, base = parse_input(filepath)
+	print(base)
 	print('part 1:', power_consumption(numbers, base))
 	print('part 2:', lifesupport_rating(numbers, base))
 
@@ -10,7 +11,9 @@ def main (filepath, base):
 def parse_input (filepath):
 	with open(filepath, 'r') as filehandle:
 		# the input is a list of numbers as digit strings
-		return filehandle.read().strip().split('\n')
+		numbers = filehandle.read().strip().split('\n')
+		# if we assume that all valid characters show up somewhere in the input, then we can determine the base automatically (e.g. only 0s and 1s means it's binary)
+		return numbers, len(set(''.join(numbers)))
 
 
 def digit_counts (numbers, base):
@@ -67,4 +70,4 @@ def filter_digits (numbers, base, counts, filter, tie_winner, index):
 
 
 if __name__ == '__main__':
-	main('input.txt', 2)
+	main('input.txt')
