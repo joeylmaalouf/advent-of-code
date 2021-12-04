@@ -3,7 +3,6 @@
 
 def main (filepath):
 	numbers, base = parse_input(filepath)
-	print(base)
 	print('part 1:', power_consumption(numbers, base))
 	print('part 2:', lifesupport_rating(numbers, base))
 
