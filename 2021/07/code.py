@@ -31,9 +31,9 @@ def simple_cost (old, new):
 
 def complex_cost (old, new):
 	# 1 fuel for the first unit traveled, 2 for the second, 3 for the third, etc.
-	# return sum(range(simple_cost(old, new) + 1))
-	# the above code isn't too inefficient, but wikipedia gives a nice formula for 1 + 2 ... + n
-	n = simple_cost(old, new)
+	# return sum(range(abs(old - new) + 1))
+	# the above code isn't unreasonably inefficient, but Wikipedia did have a nice formula for 1 + 2 ... + n that's definitely better for us to use, complexity-wise
+	n = abs(old - new)
 	return int((n * (n + 1)) / 2)
 
 
