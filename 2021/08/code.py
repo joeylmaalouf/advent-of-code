@@ -61,6 +61,7 @@ def decode (patterns, values):
 
 	# the rest of the digits are only partially identifiable by their segment count, but now that we know the signals for 1, 4, 7, and 8,
 	# we can figure out which sets of signals correspond to each of the other digits by looking at how many segments they share with the ones we do know
+	# huge thanks to the adventofcode subreddit for hint to think about what segments the numbers share
 	for pattern in patterns:
 		if len(pattern) == 5:
 			# 2 is the only digit whose display has 5 segments and also shares exactly 2 of them with 4's display
