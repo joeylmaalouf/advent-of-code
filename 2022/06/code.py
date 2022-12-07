@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import copy
-import re
 
 
 def main (filepath):
@@ -12,10 +10,7 @@ def main (filepath):
 def parse_input (filepath):
 	with open(filepath, 'r') as filehandle:
 		# the input is a list of characters
-		return [
-			char
-			for char in filehandle.read().strip()
-		]
+		return filehandle.read().strip()
 
 
 def find_marker (characters, marker_length):
