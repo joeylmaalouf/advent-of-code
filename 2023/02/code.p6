@@ -1,44 +1,35 @@
 #!/usr/bin/env perl6
 
 my %games = parse-games('input.txt'.IO.lines);
-say 'part 1: ' ~ sum-possible-ids(%games, { 'red' => 12, 'green' => 13, 'blue' => 14 });
+say 'part 1: ' ~ sum-possible-ids(%games, { 'red' => 12, 'green' => 13, 'blue' => 14, });
 say 'part 2: ' ~ sum-needed-power(%games);
 
+#| keep track of the maximum number of cubes of each color shown in each game
 sub parse-games (@lines) {
 	my %games;
 	for @lines -> $line {
-		my @parts = $line.split(': ');
-		my $game-id = (@parts.head ~~ m/Game\s(\d+)/).list[0].Int;
+		my $game-id = ($line ~~ m/Game\s(\d+)/)[0].Int;
+		my @sets = $line ~~ m:g/(\d+)\s(\w+)/;
 		my %maximums;
-		my @sets = @parts.tail ~~ m:g/(\d+)\s(\w+)/;
 		for @sets -> $set {
-			my $number = $set.list[0].Int;
-			my $color = $set.list[1];
-			if %maximums{$color}:!exists || $number > %maximums{$color} {
-				%maximums{$color} = $number;
-			}
+			%maximums{$set[1]} = max(%maximums{$set[1]}, $set[0].Int);
 		}
 		%games{$game-id} = %maximums;
 	}
 	return %games;
 };
 
-sub sum-possible-ids (%games, %contents) {
+#| sum the game IDs of all the games where the bag contains enough of each color cube
+sub sum-possible-ids (%games, %bag) {
 	return (%games.keys.grep: {
-		my $possible = True;
-		for %contents.keys -> $color {
-			$possible = False if %games{$_}{$color}:exists && %games{$_}{$color} > %contents{$color};
-		}
-		$possible
+		my %game = %games{$_};
+		(%game.keys.map: {
+			%bag{$_}:exists && %bag{$_} >= %game{$_}
+		}).reduce: &infix:<&>
 	}).sum;
 }
 
+#| sum the power values (products of the required cube counts) calculated from each game
 sub sum-needed-power (%games) {
-	return (%games.values.map: {
-		my $product = 1;
-		for $_.values -> $value {
-			$product *= $value;
-		}
-		$product
-	}).sum;
+	return (%games.values.map: { [*] $_.values }).sum;
 }
