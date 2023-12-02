@@ -8,16 +8,16 @@ say 'part 2: ' ~ sum-calib-values(@lines, {
 });
 
 #| sum the calibration values parsed from each line
-sub sum-calib-values (@lines, %replacements = {}) {
-	return (get-calib-value($_, %replacements) for @lines).sum;
+sub sum-calib-values (@lines, %also-digits = {}) {
+	return (get-calib-value($_, %also-digits) for @lines).sum;
 };
 
-#| parse a calibration value from the line, accounting for any optional mapping beyond basic digits
-sub get-calib-value ($line, %replacements) {
+#| parse a calibration value from the line, accounting for any optional mapping of other patterns to digits
+sub get-calib-value ($line, %also-digits) {
 	my $pattern = '\d';
-	$pattern ~= '||' ~ %replacements.keys.join('||') if %replacements;
+	$pattern ~= '||' ~ %also-digits.keys.join('||') if %also-digits;
 	my @matches = $line.match(rx/(<$pattern>)/, :exhaustive);
-	my $first = %replacements{@matches.head} // @matches.head;
-	my $last = %replacements{@matches.tail} // @matches.tail;
+	my $first = %also-digits{@matches.head} // @matches.head;
+	my $last = %also-digits{@matches.tail} // @matches.tail;
 	return ($first ~ $last).Int;
 };
