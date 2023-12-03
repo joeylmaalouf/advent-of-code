@@ -1,8 +1,8 @@
 #!/usr/bin/env perl6
 
 my %games = parse-games('input.txt'.IO.lines);
-say 'part 1: ' ~ sum-possible-ids(%games, { 'red' => 12, 'green' => 13, 'blue' => 14, });
-say 'part 2: ' ~ sum-needed-power(%games);
+say 'part 1: ' ~ get-possible-ids(%games, { 'red' => 12, 'green' => 13, 'blue' => 14 }).sum;
+say 'part 2: ' ~ get-needed-power(%games).sum;
 
 #| keep track of the maximum number of cubes of each color shown in each game
 sub parse-games (@lines) {
@@ -19,17 +19,17 @@ sub parse-games (@lines) {
 	return %games;
 };
 
-#| sum the game IDs of all the games where the bag contains enough of each color cube
-sub sum-possible-ids (%games, %bag) {
-	return (%games.keys.grep: {
+#| get the game IDs of all the games where the bag contains enough of each color cube
+sub get-possible-ids (%games, %bag) {
+	return %games.keys.grep: {
 		my %game = %games{$_};
-		(%game.keys.map: {
+		%game.keys.map({
 			%bag{$_}:exists && %bag{$_} >= %game{$_}
 		}).reduce: &infix:<&>
-	}).sum;
-}
+	};
+};
 
-#| sum the power values (products of the required cube counts) calculated from each game
-sub sum-needed-power (%games) {
-	return (%games.values.map: { [*] $_.values }).sum;
-}
+#| calculate the power values (products of the required cube counts) for each game
+sub get-needed-power (%games) {
+	return %games.values.map: { [*] $_.values };
+};
