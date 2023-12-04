@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 
 my @numbers = parse-numbers('input.txt'.IO.lines);
-say 'part 1: ' ~ filter-part-nums(@numbers).sum;
+say 'part 1: ' ~ get-part-numbers(@numbers).sum;
 say 'part 2: ' ~ get-gear-ratios(@numbers).sum;
 
 #| get the positions and values of all part numbers in the engine, as well as their adjacent symbols
@@ -37,12 +37,12 @@ sub parse-numbers (@lines) {
 	return @numbers;
 };
 
-#| get the values of the part numbers that border any symbol
-sub filter-part-nums (@numbers) {
+#| get the values of the numbers that border any symbol
+sub get-part-numbers (@numbers) {
 	return @numbers.grep({ $_{'symbols'} }).map({ $_{'value'} });
 };
 
-#| get the products of the part numbers where two of them border the same *
+#| get the products of the numbers where two of them border the same *
 sub get-gear-ratios (@numbers) {
 	my %gears;
 	for @numbers -> $number {
