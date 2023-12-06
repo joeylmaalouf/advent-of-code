@@ -28,7 +28,7 @@ sub parse-maps ($text) {
 
 #| apply the mappings in order to get to locations from seeds
 sub get-seed-locations (@seeds, %maps) {
-	return @seeds.map: {
+	return @seeds.race.map: {
 		my $value = $_;
 		for (
 			'seed-to-soil',
@@ -58,7 +58,7 @@ sub get-mapped-value ($value, @ranges) {
 #| convert a list of ranges to flattened values
 sub ranges-to-values (@ranges) {
 	my @values;
-	for @ranges -> $start, $length {
+	race for @ranges -> $start, $length {
 		@values.append($start .. $start + $length - 1);
 	}
 	return @values;
