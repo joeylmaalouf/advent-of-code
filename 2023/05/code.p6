@@ -94,6 +94,7 @@ sub get-seed-range-locations (@seeds, %maps, @categories) {
 
 #| split a seed range that may overlap with the mapping range into chunks that are fully inside (and mapped) or outside
 sub split-and-map-range (%seeds, %mapping) {
+	# thank you /r/adventofcode for the hint of mapping the relevant chunks as we split them
 	my $seeds-start = %seeds{'src-start'};
 	my $seeds-length = %seeds{'length'};
 	my $seeds-end = %seeds{'src-start'} + %seeds{'length'} - 1;
