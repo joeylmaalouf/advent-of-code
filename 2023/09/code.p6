@@ -12,8 +12,8 @@ sub parse-histories (@lines) {
 
 #| predict the previous and next values for a given value history
 sub predict-values (@history) {
-	my @steps-forwards;
 	my @steps-backwards;
+	my @steps-forwards;
 	my @differences = @history;
 	while (@differences.map(* != 0).any) {
 		for @differences.kv -> $i, $difference {
