@@ -8,3 +8,4 @@ https://adventofcode.com
 * 2021: Python 3
 * 2022: Python 3
 * 2023: Perl 6
+* 2024: Perl 6
