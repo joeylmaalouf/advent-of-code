@@ -16,9 +16,7 @@ sub get-distance (@list1, @list2) {
 #| gets the similarity between two lists by checking repetition counts
 sub get-similarity (@list1, @list2) {
     my %occurrences;
-    for @list2 -> $value {
-        ++%occurrences{$value};
-    }
+    %occurrences{$_}++ for @list2;
     return (@list1.map: {
         $_ * (%occurrences{$_} || 0)
     }).sum;
