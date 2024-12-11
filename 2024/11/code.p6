@@ -9,7 +9,7 @@ my %stones; @stones.map({ %stones{$_}++ });
 say 'part 1: ' ~ count-after-blinks(%stones.clone, 25);
 say 'part 2: ' ~ count-after-blinks(%stones.clone, 75);
 
-# #| counts how many stones we have after blinking
+#| counts how many stones we have after blinking
 sub count-after-blinks (%stones, $steps) {
     my %new;
     for 0 ^.. $steps -> $step {
